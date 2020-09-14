@@ -9,18 +9,18 @@ namespace A01LászlóBettina
 {
     class Program
     {
-        static StreamReader olv = new StreamReader("adatok.dat");
+        static int[] adat = new int[1000];
+
         private static void Beolvasas()
         {
-            string[] sor ;
+            StreamReader olv = new StreamReader("adatok.dat");
 
             while (!olv.EndOfStream)
             {
                 string[] adatok = olv.ReadLine().Split(';');
-                int[] adat = new int[1000];
+                
                 Console.WriteLine(adatok);
-
-
+                
                 for (int i = 0; i < adat.Length; i++)
                 {
                     adat[i] = int.Parse(adatok[i]);
@@ -30,20 +30,36 @@ namespace A01LászlóBettina
         }
         private static void Maximumertek()
         {
-            int max = 0;
-            for (int i = 0; i < olv.Length; i++)
+            int max = 1000;
+            for (int i = 0; i < adat.Length; i++)
             {
-                if (olv[max] < olv[i])
+                if (adat[max] < adat[i])
                 {
                     max = i;
                 }
             }
-            Console.WriteLine("Maximum szám: {0} ami a {1}, indexű helyen van", olv[max], max);
+            Console.WriteLine("A maximum: {0}", max);
 
         }
         private static void Egyediek()
         {
+            Console.WriteLine("Megszámlálás tétele");
+            int x = 0;
+            for (int i = 0; i < adat.Length; i++)
+            {
+                if (adat[i] % 5 == 0 && adat[i] % 7 == 0)
+                {
+                    x++;
+                }
+
+            }
             
+            Console.WriteLine("5 és 7 oszthatóak száma: {0}", x);
+
+            StreamWriter ir = File.AppendText("egyediek.txt");
+            ir.WriteLine("{0}");
+            ir.Close();
+
         }
         static void Main(string[] args)
         {
