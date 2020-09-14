@@ -9,7 +9,7 @@ namespace A01LászlóBettina
 {
     class Program
     {
-        static int[] adat = new int[1000];
+        static int[] adat = new int[2000];
 
         private static void Beolvasas()
         {
@@ -17,7 +17,7 @@ namespace A01LászlóBettina
 
             while (!olv.EndOfStream)
             {
-                string[] adatok = olv.ReadLine().Split(';');
+                string[] adatok = olv.ReadLine().Split();
                 
                 Console.WriteLine(adatok);
                 
@@ -53,11 +53,10 @@ namespace A01LászlóBettina
                 }
 
             }
-            
             Console.WriteLine("5 és 7 oszthatóak száma: {0}", x);
 
             StreamWriter ir = File.AppendText("egyediek.txt");
-            ir.WriteLine("{0}");
+            ir.WriteLine("{0}", adat);
             ir.Close();
 
         }
@@ -66,6 +65,7 @@ namespace A01LászlóBettina
             Beolvasas();
             Maximumertek();
             Egyediek();
+            Console.ReadKey();
         }
 
         
